@@ -1,5 +1,6 @@
 package br.com.cielo.cielo.repository.repositoryImpl;
 
+import br.com.cielo.cielo.exception.Exception;
 import br.com.cielo.cielo.model.Lancamento;
 import br.com.cielo.cielo.repository.ExtratoContaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,16 +19,6 @@ public class ExtratoLancamentoRepositoryImpl implements ExtratoContaRepository {
 
     @Override
     public Lancamento recuperaLancamentoConta() {
-        return null;
-    }
-
-    @Override
-    public Lancamento recuperaLancamentoContaEntreData() {
-        return null;
-    }
-
-
-    private Lancamento transformaJsonObject() {
 
         ObjectMapper object = new ObjectMapper();
         Lancamento lancamentos = null;
@@ -36,9 +27,8 @@ public class ExtratoLancamentoRepositoryImpl implements ExtratoContaRepository {
             InputStream file = this.getClass().getClassLoader().getResourceAsStream(JSON_DATA_FILE);
             lancamentos = object.readValue(new File("json/lancamento-conta-legado.json"), Lancamento.class);
         }catch (IOException io) {
-
+            throw new Exception("Não é possivel recuperar os lançamentos da Conta!");
         }
-
 
         return lancamentos;
     }

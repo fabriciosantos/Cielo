@@ -5,6 +5,4 @@ import br.com.cielo.cielo.model.Lancamento;
 public interface ExtratoContaRepository {
 
     public Lancamento recuperaLancamentoConta();
-
-    public Lancamento recuperaLancamentoContaEntreData();
 }
